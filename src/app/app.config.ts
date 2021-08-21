@@ -25,10 +25,10 @@ export interface AppConfig {
 
 export const BaseAppConfig: AppConfig = {
 	appName: "YourDeliveryAppName",
-	apiBase: "https://yourapibase.com/",
-	googleApiKey: "",
-	oneSignalAppId: "",
-	oneSignalGPSenderId: "",
+    apiBase: "http://192.168.0.115:8001/",
+    googleApiKey:"AIzaSyDLMJOClhhQjkfepu0R8iOCIt7bUpUF0nU", //"AIzaSyA3ACyv5bfuERtbkek_M4rTK3NH-Jt9RBk",
+    oneSignalAppId: "14a71c55-8888-4373-afa7-f69c79bfdda7",
+    oneSignalGPSenderId: "971942122749",
 	availableLanguages: [{
         code: 'en',
         name: 'English'
@@ -59,12 +59,12 @@ export const BaseAppConfig: AppConfig = {
     }],
 	demoMode: false,
     firebaseConfig: {
-        webApplicationId: "",
-        apiKey: "",
-        authDomain: "",
-        databaseURL: "",
-        projectId: "",
-        storageBucket: "",
-        messagingSenderId: ""
+        apiKey: "AIzaSyBzkgi5R1M_owyTrPzfkw8-4OJw7vEcMGU",
+        authDomain: "customer-cookfu.firebaseapp.com",
+        databaseURL: "https://customer-cookfu-default-rtdb.firebaseio.com",
+        projectId: "customer-cookfu",
+        storageBucket: "customer-cookfu.appspot.com",
+        messagingSenderId: "971942122749",
+        webApplicationId: "1:971942122749:web:83d41cd821a538d1a7da94"
     }
 };
