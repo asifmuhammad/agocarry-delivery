@@ -1,0 +1,106 @@
+<ion-header class="bg_transparent">
+    <ion-toolbar>
+        <ion-title>
+            <div class="d-flex title_inner" [ngClass]="fabAction ? 'active' : ''">
+                <span>{{'order_id' | translate}}{{order.id}}</span>
+
+                <div class="order_info_button end" (click)="toggleFab()">
+                    <span class="info">
+                        <ion-icon class="zmdi zmdi-shopping-basket ion-text-center"></ion-icon>
+                    </span>
+                    <span class="cloes">
+                        <ion-icon class="zmdi zmdi-close ion-text-center"></ion-icon>
+                    </span>
+                </div>
+            </div>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <div class="order_info" [ngClass]="fabAction ? 'active' : ''">
+        <div class="item_container">
+            <div *ngFor="let product of order.products" class="item">
+                <h2 class="d-flex">
+                    {{product.vendor_product.product.title}}
+                    <img *ngIf="product.prescription_required" src="assets/images/px.png">
+                </h2>
+                <p class="d-flex">
+                    {{'qnt' | translate}}. {{product.quantity}}
+                    <span class="end">{{product.vendor_product.product.priceToShow}}</span>
+                </p>
+            </div>
+        </div>
+        <div class="payment_detail">
+            <h2 class="d-flex">
+                {{order.payment.payment_method.title}}
+                <span class="end ion-text-end">{{order.total_toshow}}</span>
+            </h2>
+        </div>
+        <div *ngIf="prescriptionLink != null" class="upload_prescription d-flex">
+            <div class="item_img">
+                <img src="assets/images/px.png">
+            </div>
+            <h2 class="d-flex">
+                {{'prescription_uploaded' | translate}}
+                <span class="icon_box end" (click)="viewPresciption()">
+                    <ion-icon class="zmdi zmdi-eye ion-text-end"></ion-icon>
+                </span>
+            </h2>
+        </div>
+    </div>
+
+    <div #map id="map" class="map">
+        <ion-spinner></ion-spinner>
+    </div>
+    <div #pleaseConnect id="please-connect">
+        <!-- <p>{{'loading' | translate}}</p> -->
+    </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+    <ion-card>
+        <div class="card_header d-flex">
+            <div class="text_box">
+                <h3>{{distanceToShow}} {{distance_metric | translate}} <span>({{durationToShow}})</span></h3>
+            </div>
+            <!-- <div class="direction end" (click)="confirmNavigation()">
+                <ion-icon class="zmdi zmdi-navigation ion-text-start"></ion-icon>
+                {{'direction' | translate}}
+            </div> -->
+        </div>
+
+        <div class="delivery_details">
+            <div class="delivery_address d-flex">
+                <ion-icon class="zmdi zmdi-pin ion-text-start"></ion-icon>
+                <div class="text_box">
+                    <h2>{{order.vendor.name}}</h2>
+                    <p>{{order.vendor.address}}</p>
+                </div>
+                <div class="iocn_box end d-flex">
+                    <ion-icon class="zmdi zmdi-navigation ion-text-start" (click)="navVendor()"></ion-icon>
+                    <ion-icon class="zmdi zmdi-comment-alt-text ion-text-end" (click)="navChat('vendor')"></ion-icon>
+                </div>
+                <div class="dotted">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="delivery_address d-flex">
+                <ion-icon class="zmdi zmdi-navigation ion-text-start"></ion-icon>
+                <div class="text_box">
+                    <h2>{{order.user.name}}</h2>
+                    <p>{{order.address.formatted_address}}</p>
+                </div>
+                <div class="iocn_box end d-flex">
+                    <ion-icon class="zmdi zmdi-navigation ion-text-start" (click)="navCustomer()"></ion-icon>
+                    <ion-icon class="zmdi zmdi-comment-alt-text ion-text-end end" (click)="navChat('customer')"></ion-icon>
+                </div>
+            </div>
+        </div>
+    </ion-card>
+    <ion-button size="large" shape="full" class="btn" (click)="actionOrder()">
+        {{actionText}}
+    </ion-button>
+    <!--</ion-footer>-->

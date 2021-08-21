@@ -1,0 +1,74 @@
+<ion-header class="bg_transparent">
+    <ion-toolbar>
+        <ion-title>{{'new_delivery_task' | translate}}({{'order_id' | translate}}{{order_request.order.id}})</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <div #map id="map" class="map">
+        <ion-spinner></ion-spinner>
+    </div>
+    <div #pleaseConnect id="please-connect">
+        <!-- <p>{{'loading' | translate}}</p> -->
+    </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+    <ion-card *ngIf="order_request">
+        <div class="card_header d-flex">
+            <h3>{{distanceToShow}} {{distance_metric | translate}} <span>&nbsp;({{durationToShow}})</span></h3>
+            <div class="direction end" (click)="navigateOrder()">
+                <ion-icon class="zmdi zmdi-navigation ion-text-start"></ion-icon>
+                {{'direction' | translate}}
+            </div>
+        </div>
+        <div class="delivery_details">
+            <div class="delivery_address d-flex">
+                <ion-icon class="zmdi zmdi-pin ion-text-start"></ion-icon>
+                <div class="text_box">
+                    <h2>{{order_request.order.vendor.name}}</h2>
+                    <p>{{order_request.order.vendor.address}}</p>
+                </div>
+
+                <!--
+				<div class="iocn_box end d-flex">
+					<ion-icon class="zmdi zmdi-phone ion-text-end end"></ion-icon>
+				</div>
+-->
+                <div class="dotted">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+            </div>
+            <div class="delivery_address d-flex">
+                <ion-icon class="zmdi zmdi-navigation ion-text-start"></ion-icon>
+                <div class="text_box">
+                    <h2>{{order_request.order.user.name}}</h2>
+                    <p>{{order_request.order.address.formatted_address}}</p>
+                </div>
+                <!--
+
+				<div class="iocn_box end d-flex">
+					<ion-icon class="zmdi zmdi-phone ion-text-end end"></ion-icon>
+				</div>
+-->
+
+            </div>
+        </div>
+    </ion-card>
+
+    <ion-row>
+        <ion-col size="6">
+            <ion-button size="large" shape="full" class="btn" (click)="confirmUpdate('accepted')">
+                {{'accept' | translate}}
+            </ion-button>
+        </ion-col>
+
+        <ion-col size="6">
+            <ion-button size="large" shape="full" class="btn danger" (click)="confirmUpdate('rejected')">
+                {{'reject' | translate}}
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-footer>

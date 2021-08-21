@@ -1,0 +1,104 @@
+<ion-header class="bg_transparent">
+    <ion-toolbar>
+        <div class="toolbar_inner d-flex">
+            <ion-buttons slot="start">
+                <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>
+                <div class="d-flex title_inner">
+                    <div class="profile_img center_img">
+                        <img *ngIf="profile && profile.user.image_url" [src]="profile.user.image_url" class="crop_img">
+                        <img *ngIf="!profile || !profile.user.image_url" src="assets/images/empty_dp.png"
+                            class="crop_img">
+                    </div>
+
+                    <div class="text_box">
+                        <h2>{{profileSummary.orders_count}} {{'orders' | translate}} <span>|</span>
+                            {{currency_icon}}{{profileSummary.earnings}}</h2>
+                        <h3>{{'today' | translate}}</h3>
+                    </div>
+                </div>
+                <!--
+                <div class="d-flex title_inner">
+                    <span *ngIf="profile.is_online!=1">{{'you_are_offline' | translate}}</span>
+                    <span *ngIf="profile.is_online==1">{{'you_are_online' | translate}}</span>
+
+                    <div *ngIf="profile.is_online!=1" class="online_button online end" (click)="toggleOnline()">
+                        {{'go_online' | translate}}
+                    </div>
+                    <div *ngIf="profile.is_online==1" class="online_button offline end" (click)="toggleOnline()">
+                        {{'go_offline' | translate}}
+                    </div>
+                </div>
+-->
+            </ion-title>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <div #map id="map" class="map">
+        <!-- <ion-spinner></ion-spinner> -->
+    </div>
+    <div #pleaseConnect id="please-connect">
+        <!-- <p>{{'loading' | translate}}</p> -->
+    </div>
+</ion-content>
+
+<ion-footer class="ion-no-border" [ngClass]="expandedFooter ? 'active' : ''">
+    <div *ngIf="profile.is_online!=1" class="GoOnline" (click)="toggleOnline()">
+        <h2 class="ion-text-center">{{'go' | translate}}<br>{{'online' | translate}}</h2>
+    </div>
+    <!--
+    <div class="all_delivery">
+        <ion-row class="ion-text-center">
+            <ion-col size="4">
+                <h2>{{profileSummary.orders_count}}</h2>
+                <h3>{{'orders' | translate}}</h3>
+            </ion-col>
+            <ion-col size="4">
+                <h2 *ngIf="profileSummary.distance_travelled">{{profileSummary.distance_travelled}} km</h2>
+                <h3 *ngIf="profileSummary.distance_travelled">{{'ride' | translate}}</h3>
+            </ion-col>
+            <ion-col size="4">
+                <h2>{{currency_icon}}{{profileSummary.earnings}}</h2>
+                <h3>{{'earnings' | translate}}</h3>
+            </ion-col>
+        </ion-row>
+    </div>
+-->
+
+    <div class="online_offile_option d-flex">
+        <div class="text_box" *ngIf="profile.is_online==1">
+            <h2 class="d-flex online">
+                <span></span>
+                &nbsp;&nbsp;&nbsp;
+                <small>{{'you_are_online' | translate}}</small>
+            </h2>
+            <h2 class="d-flex offline" (click)="toggleOnline()">
+                <span></span>
+                &nbsp;&nbsp;&nbsp;
+                <small>{{'go_offline' | translate}} </small>
+            </h2>
+        </div>
+
+        <div class="text_box" *ngIf="profile.is_online!=1">
+            <h2 class="d-flex offline">
+                <span></span>
+                &nbsp;&nbsp;&nbsp;
+                <small>{{'you_are_offline' | translate}}</small>
+            </h2>
+            <h2 class="d-flex online" (click)="toggleOnline()">
+                <span></span>
+                &nbsp;&nbsp;&nbsp;
+                <small>{{'go_online' | translate}}</small>
+            </h2>
+        </div>
+        <ion-icon class="zmdi zmdi-chevron-up" (click)="toggleFooterExpansion()"></ion-icon>
+    </div>
+
+    <ion-button *ngIf="profile.is_online==1" size="large" expand="full" class="btn" (click)="checkDeliveryRequest()">
+        {{'check_delivery' | translate}}
+    </ion-button>
+
+</ion-footer>

@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>{{'contact_us' | translate}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="form">
+        <h1>{{'your_words' | translate}}<br>{{'means_a_lot' | translate}}<br>{{'to_us' | translate}} !</h1>
+        <h2>{{'let_us_know_queries_feedback' | translate}}</h2>
+        <ion-list lines="none">
+            <ion-item lines="none">
+                <div class="item_inner d-flex">
+<!--                    <ion-label position="fixed">{{'full_name' | translate}}</ion-label>-->
+                    <ion-icon class="zmdi zmdi-account ion-text-start"></ion-icon>
+                    <ion-input placeholder="{{'full_name' | translate}}"disabled="true" [(ngModel)]="supportRequest.name"></ion-input>
+                </div>
+            </ion-item>
+            <ion-item lines="none">
+                <div class="item_inner d-flex">
+<!--                    <ion-label position="fixed">{{'email_address' | translate}}</ion-label>-->
+                    <ion-icon class="zmdi zmdi-email ion-text-start"></ion-icon>
+                    <ion-input placeholder="{{'email_address' | translate}}" disabled="true" [(ngModel)]="supportRequest.email"></ion-input>
+                </div>
+            </ion-item>
+
+            <ion-item lines="none">
+                <div class="item_inner d-flex">
+                    <ion-icon class="zmdi zmdi-edit ion-text-start"></ion-icon>
+                    <ion-textarea type="name" rows="3" [(ngModel)]="supportRequest.message" maxlength="500" placeholder="{{'enter_your_message' | translate}}"></ion-textarea>
+                </div>
+            </ion-item>
+            <ion-button size="large" shape="block" class="btn" (click)="submit()">
+                {{'submit' | translate}}
+            </ion-button>
+        </ion-list>
+    </div>
+
+    <div class="footer_banner">
+        <img src="assets/images/hero_image.png">
+    </div>
+</ion-content>
